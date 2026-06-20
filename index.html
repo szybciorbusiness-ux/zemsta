@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gibające profilowe</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="stage">
+      <section class="pet-card" aria-label="Interaktywne profilowe">
+        <div class="topbar">
+          <button class="icon-button" id="resetBtn" type="button" aria-label="Resetuj gibanie" title="Resetuj">
+            <span aria-hidden="true">↺</span>
+          </button>
+          <label class="icon-button upload" for="avatarInput" aria-label="Wgraj zdjęcie" title="Wgraj zdjęcie">
+            <span aria-hidden="true">＋</span>
+          </label>
+          <input id="avatarInput" type="file" accept="image/*" />
+        </div>
+
+        <div class="avatar-wrap" id="avatarWrap">
+          <div class="squish-shadow"></div>
+          <div class="avatar" id="avatar" role="img" aria-label="Profilowe do głaskania">
+            <img id="avatarImg" alt="" />
+            <div class="default-face" id="defaultFace">
+              <div class="ears"></div>
+              <div class="face-glow"></div>
+              <div class="eyes"></div>
+              <div class="mouth"></div>
+              <div class="whiskers left"></div>
+              <div class="whiskers right"></div>
+            </div>
+            <div class="shine"></div>
+            <div class="rub-ripples" id="ripples"></div>
+          </div>
+        </div>
+
+        <div class="hint">
+          <strong>Głaszcz</strong>
+          <span>kursorem albo palcem</span>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
