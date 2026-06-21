@@ -410,6 +410,7 @@ const avatarImg = document.querySelector("#avatarImg");
 const avatarInput = document.querySelector("#avatarInput");
 const resetBtn = document.querySelector("#resetBtn");
 const ripples = document.querySelector("#ripples");
+const pressSoundUrl = "./uwu-hannah.mp3";
 
 const state = {
   x: 0,
@@ -473,6 +474,13 @@ function addRipple(x, y) {
   ripple.addEventListener("animationend", () => ripple.remove(), { once: true });
 }
 
+function playPressSound() {
+  const sound = new Audio(pressSoundUrl);
+  sound.volume = 0.82;
+  sound.play().catch(() => {});
+  sound.addEventListener("ended", () => sound.remove?.(), { once: true });
+}
+
 function touchAvatar(event) {
   const rect = avatar.getBoundingClientRect();
   const px = clamp((event.clientX - rect.left) / rect.width, 0, 1);
@@ -525,6 +533,7 @@ function animate() {
 
 wrap.addEventListener("pointerdown", (event) => {
   wrap.setPointerCapture(event.pointerId);
+  playPressSound();
   state.touching = true;
   state.lastX = event.clientX;
   state.lastY = event.clientY;
