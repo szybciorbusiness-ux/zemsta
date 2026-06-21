@@ -46,55 +46,10 @@ body {
 .pet-card {
   width: min(92vw, 470px);
   min-height: min(90vh, 650px);
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  align-items: center;
-  gap: 24px;
-  padding: 22px;
-}
-
-.topbar {
-  justify-self: end;
   display: flex;
-  gap: 10px;
-  padding: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(18px);
-  box-shadow: none;
-}
-
-.icon-button {
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  border: 0;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--ink);
-  font: 700 24px/1 system-ui;
-  transition:
-    transform 160ms ease,
-    background 160ms ease;
-}
-
-.icon-button:hover {
-  transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.17);
-}
-
-.upload {
-  font-size: 28px;
-}
-
-input[type="file"] {
-  position: absolute;
-  inline-size: 1px;
-  block-size: 1px;
-  opacity: 0;
-  pointer-events: none;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
 }
 
 .avatar-wrap {
@@ -311,25 +266,6 @@ input[type="file"] {
   }
 }
 
-.hint {
-  justify-self: center;
-  display: flex;
-  align-items: baseline;
-  gap: 9px;
-  max-width: 100%;
-  padding: 12px 18px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--muted);
-  box-shadow: none;
-  backdrop-filter: blur(16px);
-}
-
-.hint strong {
-  color: var(--ink);
-}
-
 @media (max-width: 560px) {
   body {
     overflow: hidden;
@@ -344,23 +280,11 @@ input[type="file"] {
   .pet-card {
     width: 100%;
     min-height: 100%;
-    gap: 14px;
     padding: 12px 0 22px;
-  }
-
-  .topbar {
-    margin-right: 4px;
   }
 
   .avatar-wrap {
     width: min(86vw, 390px);
-  }
-
-  .hint {
-    font-size: 15px;
-    white-space: normal;
-    border-radius: 20px;
-    text-align: center;
   }
 }
 
@@ -369,16 +293,6 @@ input[type="file"] {
   <body>
     <main class="stage">
       <section class="pet-card" aria-label="Interaktywne profilowe">
-        <div class="topbar">
-          <button class="icon-button" id="resetBtn" type="button" aria-label="Resetuj gibanie" title="Resetuj">
-            <span aria-hidden="true">â†º</span>
-          </button>
-          <label class="icon-button upload" for="avatarInput" aria-label="Wgraj zdjÄ™cie" title="Wgraj zdjÄ™cie">
-            <span aria-hidden="true">ï¼‹</span>
-          </label>
-          <input id="avatarInput" type="file" accept="image/*" />
-        </div>
-
         <div class="avatar-wrap" id="avatarWrap">
           <div class="squish-shadow"></div>
           <div class="avatar" id="avatar" role="img" aria-label="Profilowe do gÅ‚askania">
@@ -395,11 +309,6 @@ input[type="file"] {
             <div class="rub-ripples" id="ripples"></div>
           </div>
         </div>
-
-        <div class="hint">
-          <strong>GÅ‚aszcz</strong>
-          <span>kursorem albo palcem</span>
-        </div>
       </section>
     </main>
 
@@ -407,8 +316,6 @@ input[type="file"] {
 const wrap = document.querySelector("#avatarWrap");
 const avatar = document.querySelector("#avatar");
 const avatarImg = document.querySelector("#avatarImg");
-const avatarInput = document.querySelector("#avatarInput");
-const resetBtn = document.querySelector("#resetBtn");
 const ripples = document.querySelector("#ripples");
 const pressSoundUrl = "./uwu-hannah.mp3";
 
@@ -557,34 +464,6 @@ wrap.addEventListener("pointercancel", () => {
 
 wrap.addEventListener("pointerleave", () => {
   state.touching = false;
-});
-
-avatarInput.addEventListener("change", () => {
-  const [file] = avatarInput.files;
-  if (!file) return;
-  const reader = new FileReader();
-  reader.addEventListener("load", () => {
-    setAvatarSource(reader.result);
-  });
-  reader.readAsDataURL(file);
-});
-
-resetBtn.addEventListener("click", () => {
-  Object.assign(state, {
-    x: 0,
-    y: 0,
-    vx: 0,
-    vy: 0,
-    rx: 0,
-    ry: 0,
-    rz: 0,
-    sx: 1,
-    sy: 1,
-    pointerX: 0.5,
-    pointerY: 0.5,
-    touching: false,
-  });
-  setVars();
 });
 
 setVars();
